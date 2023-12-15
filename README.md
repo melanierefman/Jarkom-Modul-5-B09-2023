@@ -384,4 +384,14 @@ iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j
 - `iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j DROP`: Menambahkan aturan ke chain INPUT untuk membatasi jumlah koneksi ICMP (ping) yang diterima. Aturan ini akan menolak paket ICMP jika jumlah koneksi dari satu alamat IP melebihi 3 secara bersamaan
 
 #### Pembuktian
-(gambar)
+- Berikut pembuktikan pada DHCP Server (Revolte)
+![14-no 3](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/f3c3300d-967c-4125-9770-2637f35ce826)
+![13-no 3](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/0b791bcc-3227-4b9a-8a39-1a8bd3b0bb5d)
+![12-no 3](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/c4ce0c90-813a-4ac6-9f41-889203327f25)
+![11-no 3](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/bebc4624-c89b-42c6-8201-50b377bd89ff)
+- Berikut pembuktian pada DNS Server (Ritcher)
+![16-no 3](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/4614f584-3bda-46f7-8c59-f5e86cccc2aa)
+![15-no 3](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/e4ba6671-22fc-4093-962e-4ab842fc6b1d)
+![18-no 3](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/9271f6b8-d0e6-44f0-a9ef-f80836b61a75)
+![17-no 3](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/1a7bdd93-565a-4817-99e8-bb200758844e)
+Dari kumpulan gambar diatas dapat diketahui bahwa hanya 3 node saja yang berhasil ngeping ke DHCP dan DNS Server (Laubhills, GrobeForest, dan TurkRegion), sedangkan node ke 4 yaitu SchewerMountain tidak bisa.
