@@ -360,12 +360,15 @@ iptables -A INPUT -p udp -j DROP
 
 ### Pembuktian
 - Testing port 8080 pada TCP (berhasil)
+
 ![5-no 2](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/d5e89294-7576-430e-89a1-819b399af793)
 ![6-no 2](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/6ca41303-8da9-4e19-b171-fc14c338e45c)
 - Testing kecuali port 8080 pada TCP (tidak berhasil)
+
 ![7-no 2](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/237aee22-f6f5-47f4-a773-057b9731df0f)
 ![8-no 2](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/6323bad8-2852-4858-b443-dc5b2123980a)
 - Testing pada UDP (tidak berhasil)
+
 ![10-no 2](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/3b656d56-341a-4cff-818c-8481551c5277)
 ![9-no 2](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/2e388181-3983-4aaa-b371-a38e2adbc263)
 
