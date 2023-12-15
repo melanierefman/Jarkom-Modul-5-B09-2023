@@ -394,4 +394,5 @@ iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j
 ![15-no 3](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/e4ba6671-22fc-4093-962e-4ab842fc6b1d)
 ![18-no 3](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/9271f6b8-d0e6-44f0-a9ef-f80836b61a75)
 ![17-no 3](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/1a7bdd93-565a-4817-99e8-bb200758844e)
+
 Dari kumpulan gambar diatas dapat diketahui bahwa hanya 3 node saja yang berhasil ngeping ke DHCP dan DNS Server (Laubhills, GrobeForest, dan TurkRegion), sedangkan node ke 4 yaitu SchewerMountain tidak bisa.
