@@ -344,7 +344,7 @@ Tiap route dapat melakukan ping keluar.
 ![4-no 1](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/38ce7ea6-7974-48b9-ba8b-0ddc22ec45da)
 Gambar diatas terbukti dapat `ping google.com` pada server Sein.
 
-# No.2
+## No.2
 Kalian diminta untuk melakukan drop semua TCP dan UDP kecuali port 8080 pada TCP.
 
 ### Penyelesaian
@@ -360,10 +360,28 @@ iptables -A INPUT -p udp -j DROP
 
 ### Pembuktian
 - Testing port 8080 pada TCP (berhasil)
-(gambar)
+![5-no 2](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/d5e89294-7576-430e-89a1-819b399af793)
+![6-no 2](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/6ca41303-8da9-4e19-b171-fc14c338e45c)
 - Testing kecuali port 8080 pada TCP (tidak berhasil)
-(gambar)
+![7-no 2](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/237aee22-f6f5-47f4-a773-057b9731df0f)
+![8-no 2](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/6323bad8-2852-4858-b443-dc5b2123980a)
 - Testing pada UDP (tidak berhasil)
+![10-no 2](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/3b656d56-341a-4cff-818c-8481551c5277)
+![9-no 2](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/2e388181-3983-4aaa-b371-a38e2adbc263)
+
+## No.3
+Kepala Suku North Area meminta kalian untuk membatasi DHCP dan DNS Server hanya dapat dilakukan ping oleh maksimal 3 device secara bersamaan, selebihnya akan di drop.
+
+### Penyelesaian
+Berikut adalah syntax pada DNS dan DHCP Server agar DHCP dan DNS Server hanya dapat dilakukan ping oleh maksimal 3 device secara bersamaan, selebihnya akan di drop
+```
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j DROP
+```
+
+#### Penjelasan
+- `iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT`: Menambahkan aturan ke chain INPUT untuk mengizinkan koneksi yang terkait dengan koneksi yang sudah ada (`ESTABLISHED`) atau terkait dengan koneksi yang masih berlangsung (`RELATED`).
+- `iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j DROP`: Menambahkan aturan ke chain INPUT untuk membatasi jumlah koneksi ICMP (ping) yang diterima. Aturan ini akan menolak paket ICMP jika jumlah koneksi dari satu alamat IP melebihi 3 secara bersamaan
+
+#### Pembuktian
 (gambar)
-
-
