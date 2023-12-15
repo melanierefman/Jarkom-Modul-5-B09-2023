@@ -9,19 +9,18 @@ Anggota Kelompok B09:
 ----
 
 ## Topologi
-(gambar)
+![0-topologi](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/59cdc57f-189b-443e-90f8-dc90c301391d)
 
 ### Pembagian Subnet
-(gambar)
+![1-subnet](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/ed1a27e9-3d84-4918-8776-f5db5331cf46)
 
 ### Pembagian IP
-(gambar)
 
 #### Tree
-(gambar)
+![2-tree](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/02da60f7-bfae-431f-a56b-4465174e1bb0)
 
 #### Rute
-(gambar)
+![3-route](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/3a40bcfc-21a7-40e7-8b5d-5169241f885e)
 
 ### Konfigurasi Node
 
