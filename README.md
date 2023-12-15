@@ -340,8 +340,9 @@ iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source $ETH0_IP
 - `iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source $ETH0_IP`: Perintah ini menambahkan aturan ke tabel NAT untuk melakukan SNAT (Source NAT) pada koneksi keluar melalui antarmuka `eth0`. Ini memastikan bahwa paket yang keluar memiliki alamat sumber yang sesuai dengan alamat IP antarmuka `eth0`.
 
 #### Pembuktian
-Tiap route dapat melakukan ping keluar
-(gambar)
+Tiap route dapat melakukan ping keluar.
+![4-no 1](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/38ce7ea6-7974-48b9-ba8b-0ddc22ec45da)
+Gambar diatas terbukti dapat `ping google.com` pada server Sein.
 
 # No.2
 Kalian diminta untuk melakukan drop semua TCP dan UDP kecuali port 8080 pada TCP.
