@@ -415,7 +415,10 @@ iptables -A INPUT -p tcp --dport 22 -j DROP
 - `iptables -A INPUT -p tcp --dport 22 -j DROP`: Menambahkan aturan ke chain INPUT untuk menolak koneksi TCP dengan tujuan port 22 (SSH). Aturan ini bersifat umum dan akan menolak akses SSH dari semua alamat IP yang tidak sesuai dengan aturan sebelumnya. Sebaiknya aturan ini ditempatkan setelah aturan yang lebih spesifik.
 
 #### Pembuktian
-(gambar)
+- Stark
+![19-no 4](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/ae863202-9ad0-482d-9f92-d6cb87bd9b1e)
+- GrobeForest
+![20-no 4](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/21aba1f3-e78c-4f50-a9cf-619a2ffbb28d)
 
 ## No.5
 Selain itu, akses menuju WebServer hanya diperbolehkan saat jam kerja yaitu Senin-Jumat pada pukul 08.00-16.00.
@@ -432,4 +435,14 @@ iptables -A INPUT -p tcp --dport 80 -j DROP
 - `iptables -A INPUT -p tcp --dport 80 -j DROP`: Menambahkan aturan ke chain INPUT untuk menolak semua koneksi TCP dengan tujuan port 80. Ini dilakukan setelah aturan pertama agar memastikan bahwa setelah jam kerja pada hari kerja, akses ke layanan web pada port 80 akan ditolak.
 
 #### Pembuktian
-(gambar)
+Jam Malam `date 121319002023.00`
+- Sein
+![21 no 5](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/2f68a375-0a35-4215-bade-ad72bfcdc1dc)
+- TurkRegion
+![22 no 5](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/60f3a756-0c4f-47d9-a92f-0434e94f242a)
+
+Jam Siang `date 121313002023.00`
+- Sein
+![23 no 6](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/72e07282-02bf-43f8-babd-a9d0d9cfbedd)
+- TurkRegion
+![24 no 7](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/8a4b15d3-62ff-4997-9166-ae6bc8c9c52f)
