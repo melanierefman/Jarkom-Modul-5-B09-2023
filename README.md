@@ -387,7 +387,7 @@ iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j
 - `iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j DROP`: Menambahkan aturan ke chain INPUT untuk membatasi jumlah koneksi ICMP (ping) yang diterima. Aturan ini akan menolak paket ICMP jika jumlah koneksi dari satu alamat IP melebihi 3 secara bersamaan
 
 #### Pembuktian
-- Berikut pembuktikan pada DHCP Server (Revolte)
+- Berikut pembuktian pada DHCP Server (Revolte)
 ![14-no 3](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/f3c3300d-967c-4125-9770-2637f35ce826)
 ![13-no 3](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/0b791bcc-3227-4b9a-8a39-1a8bd3b0bb5d)
 ![12-no 3](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/c4ce0c90-813a-4ac6-9f41-889203327f25)
@@ -399,3 +399,37 @@ iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j
 ![17-no 3](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/1a7bdd93-565a-4817-99e8-bb200758844e)
 
 Dari kumpulan gambar diatas dapat diketahui bahwa hanya 3 node saja yang berhasil ngeping ke DHCP dan DNS Server (Laubhills, GrobeForest, dan TurkRegion), sedangkan node ke 4 yaitu SchewerMountain tidak bisa.
+
+## No.4
+Lakukan pembatasan sehingga koneksi SSH pada Web Server hanya dapat dilakukan oleh masyarakat yang berada pada GrobeForest.
+
+### Penyelesaian
+Berikut adalah syntax pada WebServer agar koneksi SSH terbatas.
+```
+iptables -A INPUT -p tcp --dport 22 -m iprange --src-range 10.13.8.3-10.13.11.254 -j ACCEPT
+iptables -A INPUT -p tcp --dport 22 -j DROP
+```
+
+#### Penjelasan
+- `iptables -A INPUT -p tcp --dport 22 -m iprange --src-range 10.13.8.3-10.13.11.254 -j ACCEPT`: Menambahkan aturan ke chain INPUT untuk mengizinkan koneksi TCP dengan tujuan port 22 (SSH) dari rentang alamat IP 10.13.8.3 hingga 10.13.11.254. Aturan ini memungkinkan akses SSH dari alamat IP yang sesuai dengan rentang yang ditentukan.
+- `iptables -A INPUT -p tcp --dport 22 -j DROP`: Menambahkan aturan ke chain INPUT untuk menolak koneksi TCP dengan tujuan port 22 (SSH). Aturan ini bersifat umum dan akan menolak akses SSH dari semua alamat IP yang tidak sesuai dengan aturan sebelumnya. Sebaiknya aturan ini ditempatkan setelah aturan yang lebih spesifik.
+
+#### Pembuktian
+(gambar)
+
+## No.5
+Selain itu, akses menuju WebServer hanya diperbolehkan saat jam kerja yaitu Senin-Jumat pada pukul 08.00-16.00.
+
+### Penyelesaian
+Berikut adalah syntax pada WebServer agar akses yang menuju WebServer dibatasi saat jam kerja pukul 08.00-16.00.
+```
+iptables -A INPUT -p tcp --dport 80 -m time --timestart 08:00 --timestop 16:00 --weekdays Mon,Tue,Wed,Thu,Fri -j ACCEPT
+iptables -A INPUT -p tcp --dport 80 -j DROP
+```
+
+#### Penjelasan
+- `iptables -A INPUT -p tcp --dport 80 -m time --timestart 08:00 --timestop 16:00 --weekdays Mon,Tue,Wed,Thu,Fri -j ACCEPT`: Menambahkan aturan ke chain INPUT untuk mengizinkan koneksi TCP dengan tujuan port 80 pada hari Senin hingga Jumat antara pukul 08:00 dan 16:00. Ini bertujuan untuk membolehkan akses ke layanan web selama jam kerja pada hari kerja.
+- `iptables -A INPUT -p tcp --dport 80 -j DROP`: Menambahkan aturan ke chain INPUT untuk menolak semua koneksi TCP dengan tujuan port 80. Ini dilakukan setelah aturan pertama agar memastikan bahwa setelah jam kerja pada hari kerja, akses ke layanan web pada port 80 akan ditolak.
+
+#### Pembuktian
+(gambar)
