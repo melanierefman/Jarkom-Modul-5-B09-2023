@@ -446,3 +446,138 @@ Jam Siang `date 121313002023.00`
 ![23 no 6](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/72e07282-02bf-43f8-babd-a9d0d9cfbedd)
 - TurkRegion
 ![24 no 7](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87106838/8a4b15d3-62ff-4997-9166-ae6bc8c9c52f)
+
+
+## No.6
+Lalu, karena ternyata terdapat beberapa waktu di mana network administrator dari WebServer tidak bisa stand by, sehingga perlu ditambahkan rule bahwa akses pada hari Senin - Kamis pada jam 12.00 - 13.00 dilarang (istirahat maksi cuy) dan akses di hari Jumat pada jam 11.00 - 13.00 juga dilarang (maklum, Jumatan rek).
+
+### Penyelesaian
+Berikut adalah penyelesaian agar WebServer tidak bisa akses pada hari Senin - Kamis pada jam 12.00 - 13.00 dan di hari Jumat pada jam 11.00 - 13.00
+```
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+iptables -A INPUT -p tcp --dport 80 -m time --timestart 13:01 --timestop 10:59 --weekdays Mon,Tue,Wed,Thu,Fri -j ACCEPT
+iptables -A INPUT -p tcp --dport 80 -m time --timestart 12:00 --timestop 13:00 --weekdays Mon,Tue,Wed,Thu -j DROP
+iptables -A INPUT -p tcp --dport 80 -m time --timestart 11:00 --timestop 13:00 --weekdays Fri -j DROP
+iptables -A INPUT -p tcp --dport 80 -j DROP
+
+```
+Codingan diatas akan membuat WebServer tidak bisa mengakses pada jam tersebut.
+
+#### Pembuktian
+Untuk pembuktian dapat dilakukan pada salah satu WebServer (TurkRegion) dengan menggunakan 
+```
+nc -l -p 80
+```
+
+Lalu pada sisi client (SEIN) juga lakukan dengan menggunakan
+```
+nc 10.13.8.2 80
+```
+
+## Jumat Jam 11
+![image](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87845735/e5077634-bf67-4c02-9866-e4b3dbc4a128)
+![image](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87845735/47957689-48aa-4456-8bfa-f67ad434c8db)
+dilihat bahwa keduanya tidak bisa saling akses
+
+## Jumat Jam 10
+![image](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87845735/bc12f8ce-4759-4d70-a3bd-0ad733096f84)
+![image](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87845735/d56fde2b-b1f9-4575-8a34-9c3992633a2e)
+dilihat bahwa keduanya bisa saling akses
+
+## No.7
+Karena terdapat 2 WebServer, kalian diminta agar setiap client yang mengakses Sein dengan Port 80 akan didistribusikan secara bergantian pada Sein dan Stark secara berurutan dan request dari client yang mengakses Stark dengan port 443 akan didistribusikan secara bergantian pada Sein dan Stark secara berurutan.
+
+### Penyelesaian
+```
+iptables -A PREROUTING -t nat -p tcp --dport 80 -d 10.13.8.2 -m statistic --mode nth --every 2 --packet 1 -j DNAT --to-destination 10.13.8.2
+iptables -A PREROUTING -t nat -p tcp --dport 80 -d 10.13.8.2 -j DNAT --to-destination 10.13.14.142
+iptables -A PREROUTING -t nat -p tcp --dport 443 -d 10.13.14.142 -m statistic --mode nth --every 2 --packet 1 -j DNAT --to-destination 10.13.14.142
+iptables -A PREROUTING -t nat -p tcp --dport 443 -d 10.13.14.142 -j DNAT --to-destination 10.13.8.2
+```
+#### Pembuktian
+masing2 stark dan sein di test menggunakan port 80 dan 443.
+
+### Port 80
+```
+while true; do nc -l -p 80 -c 'echo "sein"'; done
+while true; do nc -l -p 80 -c 'echo "stark"'; done
+```
+### Port 443
+```
+while true; do nc -l -p 443 -c 'echo "sein"'; done
+while true; do nc -l -p 443 -c 'echo "stark"'; done
+```
+
+setelah itu testing di turkregion pada port 80 dan 443 : 
+
+```
+nc 10.13.8.2 80
+```
+![image](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87845735/908ab208-845d-4a81-91d9-b231364497cb)
+
+```
+nc 10.13.14.142 443
+```
+![image](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87845735/76640bf2-0dee-4bfb-807d-b02fe2c6d9cd)
+dilihat bahwa output yg di hasilkan berhasil berganti ganti
+
+## No.8
+Karena berbeda koalisi politik, maka subnet dengan masyarakat yang berada pada Revolte dilarang keras mengakses WebServer hingga masa pencoblosan pemilu kepala suku 2024 berakhir. Masa pemilu (hingga pemungutan dan penghitungan suara selesai) kepala suku bersamaan dengan masa pemilu Presiden dan Wakil Presiden Indonesia 2024.
+
+### Penyelesaian
+```
+nc -l -p 80
+nc 10.13.8.2 80
+```
+
+#### Pembuktian
+date 121313002023.00 (gabisa)
+date 021613002024.00 (bisa)
+
+
+kita coba di revolte dimana waktu sekarang masih ada pada rentang pemilu yg sudah di define akan tidak bisa menerima input dari sein
+![image](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87845735/76f38622-345d-43e8-a019-4ebac71f2ee3)
+![image](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87845735/a1610c9f-013c-4e06-8ad7-3693b500cc33)
+
+Lalu kita coba ganti tanggalnya jadi diluar batasan pemilu (16 feb 24)
+![image](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87845735/e2016db4-e79f-4e48-b99b-8a34cd943e4e)
+![image](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87845735/b847a7b3-ea80-4455-896a-a7db7902f91c)
+
+
+## No.9
+Sadar akan adanya potensial saling serang antar kubu politik, maka WebServer harus dapat secara otomatis memblokir  alamat IP yang melakukan scanning port dalam jumlah banyak (maksimal 20 scan port) di dalam selang waktu 10 menit. 
+(clue: test dengan nmap)
+
+#### Penyelesaian
+```
+iptables -N scan_port
+
+iptables -A INPUT -m recent --name scan_port --update --seconds 600 --hitcount 20 -j DROP
+iptables -A FORWARD -m recent --name scan_port --update --seconds 600 --hitcount 20 -j DROP
+
+iptables -A INPUT -m recent --name scan_port --set -j ACCEPT
+iptables -A FORWARD -m recent --name scan_port --set -j ACCEPT
+
+```
+#### Pembuktian
+![image](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87845735/08060d1e-6b46-416a-b603-0d3c3376791c)
+![image](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87845735/486f9faa-6bf8-4e82-813f-685e4fccf7eb)
+
+dilihat bahwa ping maximal pada 20 scan port
+
+## No.10
+Karena kepala suku ingin tau paket apa saja yang di-drop, maka di setiap node server dan router ditambahkan logging paket yang di-drop dengan standard syslog level. 
+
+### Penyelesaian
+```
+iptables -A INPUT  -j LOG --log-level debug --log-prefix 'Dropped Packet' -m limit --limit 1/second --limit-burst 10
+```
+
+### Pemnbuktian
+![image](https://github.com/melanierefman/Jarkom-Modul-5-B09-2023/assets/87845735/92d3556c-f7d6-4171-a9bb-b13f75e31051)
+
+Pada list iptables tersebut terdapat rules untuk membuat log maka dari itu paket telah didrop
+
+
+
+
