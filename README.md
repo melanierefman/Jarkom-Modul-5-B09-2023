@@ -215,36 +215,36 @@ up echo nameserver 192.168.122.1 > /etc/resolv.conf
 
 #### Aura
 ```
-route add -net 10.12.0.0 netmask 255.255.248.0 gw 10.12.14.150
-route add -net 10.12.8.0 netmask 255.255.252.0 gw 10.12.14.150
-route add -net 10.12.14.140 netmask 255.255.255.252 gw 10.12.14.146
-route add -net 10.12.14.136 netmask 255.255.255.252 gw 10.12.14.146
-route add -net 10.12.12.0 netmask 255.255.254.0 gw 10.12.14.146
-route add -net 10.12.14.0 netmask 255.255.255.128 gw 10.12.14.146
-route add -net 10.12.14.132 netmask 255.255.255.252 gw 10.12.14.146
-route add -net 10.12.14.128 netmask 255.255.255.252 gw 10.12.14.146
+route add -net 10.13.0.0 netmask 255.255.248.0 gw 10.13.14.150
+route add -net 10.13.8.0 netmask 255.255.252.0 gw 10.13.14.150
+route add -net 10.13.14.140 netmask 255.255.255.252 gw 10.13.14.146
+route add -net 10.13.14.136 netmask 255.255.255.252 gw 10.13.14.146
+route add -net 10.13.12.0 netmask 255.255.254.0 gw 10.13.14.146
+route add -net 10.13.14.0 netmask 255.255.255.128 gw 10.13.14.146
+route add -net 10.13.14.122 netmask 255.255.255.252 gw 10.13.14.146
+route add -net 10.13.14.128 netmask 255.255.255.252 gw 10.13.14.146
 ```
 #### Heiter
 ```
-route add -net 0.0.0.0 netmask 0.0.0.0 gw 10.12.14.149
+route add -net 0.0.0.0 netmask 0.0.0.0 gw 10.13.14.149
 ```
 #### Frieren
 ```
-route add -net 0.0.0.0 netmask 0.0.0.0 gw 10.12.14.145
-route add -net 10.12.12.0 netmask 255.255.254.0 gw 10.12.14.138
-route add -net 10.12.14.0 netmask 255.255.255.128 gw 10.12.14.138
-route add -net 10.12.14.132 netmask 255.255.255.252 gw 10.12.14.138
-route add -net 10.12.14.128 netmask 255.255.255.252 gw 10.12.14.138
+route add -net 0.0.0.0 netmask 0.0.0.0 gw 10.13.14.145
+route add -net 10.13.12.0 netmask 255.255.254.0 gw 10.13.14.138
+route add -net 10.13.14.0 netmask 255.255.255.128 gw 10.13.14.138
+route add -net 10.13.14.132 netmask 255.255.255.252 gw 10.13.14.138
+route add -net 10.13.14.128 netmask 255.255.255.252 gw 10.13.14.138
 ```
 #### Himmel
 ```
-route add -net 0.0.0.0 netmask 0.0.0.0 gw 10.12.14.137 
-route add -net 10.12.14.132 netmask 255.255.255.252 gw 10.12.14.3
-route add -net 10.12.14.128 netmask 255.255.255.252 gw 10.12.14.3
+route add -net 0.0.0.0 netmask 0.0.0.0 gw 10.13.14.137 
+route add -net 10.13.14.132 netmask 255.255.255.252 gw 10.13.14.3
+route add -net 10.13.14.128 netmask 255.255.255.252 gw 10.13.14.3
 ```
 #### Fern
 ```
-route add -net 0.0.0.0 netmask 0.0.0.0 gw 10.12.14.1
+route add -net 0.0.0.0 netmask 0.0.0.0 gw 10.13.14.1
 ```
 
 ### Konfigurasi DHCP (dhcpd.conf)
